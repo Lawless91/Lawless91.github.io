@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSIRIS - AI-Powered Regenerative Farming Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-16 animate__animated animate__fadeIn">
+            <svg class="mx-auto w-24 h-24 text-green-600" viewbox="0 0 100 100">
+                <path fill="currentColor" d="M50,10 C30,10 15,25 15,45 C15,65 30,80 50,80 C70,80 85,65 85,45 C85,25 70,10 50,10 M50,0 C75,0 95,20 95,45 C95,70 75,90 50,90 C25,90 5,70 5,45 C5,20 25,0 50,0">
+                    <animate attributename="d" dur="4s" repeatcount="indefinite" values="M50,10 C30,10 15,25 15,45 C15,65 30,80 50,80 C70,80 85,65 85,45 C85,25 70,10 50,10;
+                                M50,15 C35,15 20,30 20,50 C20,70 35,85 50,85 C65,85 80,70 80,50 C80,30 65,15 50,15;
+                                M50,10 C30,10 15,25 15,45 C15,65 30,80 50,80 C70,80 85,65 85,45 C85,25 70,10 50,10"></animate>
+                </path>
+                <circle fill="currentColor" cx="50" cy="45" r="5">
+                    <animate attributename="cy" dur="2s" repeatcount="indefinite" values="45;42;45"></animate>
+                </circle>
+            </svg>
+
+            <h1 id="osiris" class="text-5xl font-bold text-green-700 mt-6 mb-4">OSIRIS</h1>
+
+            <p class="text-xl text-green-600">AI-Powered Regenerative Farming Assistant</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto" role="main">
+            <div class="section text-center mb-16 animate__animated animate__fadeInUp animate__delay-1s">
+                <h2 id="revolutionizing-agriculture-with-ai-and-nasa-data" class="text-3xl font-semibold text-green-800 mb-6">Revolutionizing Agriculture with AI and NASA Data</h2>
+
+                <p class="text-lg mb-8">Get personalized, data-driven guidance for sustainable farming practices, tailored to your location and needs.</p>
+
+                <a href="#scroll" class="inline-block bg-green-600 text-white font-bold py-4 px-10 rounded-full hover:bg-green-700 transition duration-300 transform hover:scale-105 shadow-lg text-lg no-underline">START FARMING SMARTER</a>
+            </div>
+
+            <div class="section grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+
+                    <h3 id="precision-guidance" class="text-xl font-semibold text-green-800 mb-2">Precision Guidance</h3>
+
+                    <p>Step-by-step advice customized to your farm's unique conditions using satellite data.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+
+                    <h3 id="real-time-updates" class="text-xl font-semibold text-green-800 mb-2">Real-Time Updates</h3>
+
+                    <p>Stay informed about local policies, available grants, and optimal timing for farming practices.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                    </div>
+
+                    <h3 id="sustainable-practices" class="text-xl font-semibold text-green-800 mb-2">Sustainable Practices</h3>
+
+                    <p>Expert guidance on cover cropping, reduced tillage, and other regenerative techniques.</p>
+                </div>
+            </div>
+
+            <section class="mb-16 animate__animated animate__fadeInUp animate__delay-1s">
+                <h2 id="scroll" class="text-2xl font-semibold text-green-800 mb-6 text-center">Select Your Farming Area</h2>
+
+                    <p class="text-lg mb-8 text-center">After selecting the desired area, click on "Analyze Selected Area" to get started.</p>
+
+                <div id="map" style="height: 400px; width: 100%;"></div>
+                
+                <div class="mt-4 text-center">
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Button with Chatbot Functionality</title>
+                    
+                        <!-- Aggiungi il collegamento per Bootstrap -->
+                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+                        
+                        <!-- Script del chatbot -->
+                        <script>
+                          window.difyChatbotConfig = {
+                            token: 'G9kExC3Z2YGBCmLJ'
+                          }
+                        </script>
+                        <script
+                          src="https://udify.app/embed.min.js"
+                          id="G9kExC3Z2YGBCmLJ"
+                          defer>
+                        </script>
+                    
+                        <!-- Stile per personalizzare il colore del bottone del chatbot -->
+                        <style>
+                          #dify-chatbot-bubble-button {
+                            background-color: #1C64F2 !important;
+                          }
+                        </style>
+                    
+                    </head>
+                    <body>
+                    
+                      <!-- Bottone Bootstrap personalizzato con funzionalità del chatbot -->
+                      <a id="analyzeButton" class="btn btn-success text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300 ml-4">
+                        Analyze Selected Area
+                      </a>
+                    
+                      <script>
+                        // Aggiungi un listener al bottone per attivare il chatbot
+                        document.getElementById('analyzeButton').addEventListener('click', function() {
+                          // Simula un clic sul bottone del chatbot per aprirlo
+                          const chatbotButton = document.getElementById('dify-chatbot-bubble-button');
+                          if (chatbotButton) {
+                            chatbotButton.click();
+                          }
+                        });
+                      </script>
+                    </body>
+                </div>
+            </section>
+            <div class="section bg-green-50 p-8 rounded-2xl shadow-inner mb-16">
+                <h2 id="what-osiris-can-do-for-you" class="text-2xl font-semibold text-green-800 mb-6 text-center">What Osiris Can Do For You</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-green-600 mr-3 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+
+                        <p>Analyze soil health using NASA satellite data</p>
+                    </div>
+
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-green-600 mr-3 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+
+                        <p>Recommend optimal crop rotation schedules</p>
+                    </div>
+
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-green-600 mr-3 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+
+                        <p>Find local sustainability grants and programs</p>
+                    </div>
+
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-green-600 mr-3 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+
+                        <p>Provide weather-based farming recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center text-sm text-gray-600">
+            <p>© 2024 Osiris. Empowering sustainable agriculture.</p>
+            <p>Powered by AI and NASA Earth Science Data</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('map').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            }).addTo(map);
+
+            var drawnItems = new L.FeatureGroup();
+            map.addLayer(drawnItems);
+
+            var drawControl = new L.Control.Draw({
+                edit: {
+                    featureGroup: drawnItems
+                },
+                draw: {
+                    polygon: true,
+                    polyline: false,
+                    rectangle: true,
+                    circle: false,
+                    marker: false,
+                    circlemarker: false
+                }
+            });
+            map.addControl(drawControl);
+
+            map.on(L.Draw.Event.CREATED, function (event) {
+                var layer = event.layer;
+                drawnItems.addLayer(layer);
+            });
+
+            document.getElementById('clearButton').addEventListener('click', function() {
+                drawnItems.clearLayers();
+            });
+
+            document.getElementById('analyzeButton').addEventListener('click', function() {
+                var areas = [];
+                drawnItems.eachLayer(function(layer) {
+                    if (layer instanceof L.Polygon) {
+                        areas.push(layer.getLatLngs());
+                    }
+                });
+                if (areas.length > 0) {
+                    console.log('Areas to analyze:', areas);
+                    alert('Analysis started for ' + areas.length + ' selected area(s).');
+                    // Here you would typically send this data to your backend for analysis
+                } else {
+                    alert('Please select at least one area on the map before analyzing.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
